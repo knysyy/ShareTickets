@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import { Button, Icon, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -22,6 +22,10 @@ class EditForm extends Component {
 
     handleButtonPress = () => {
         const { displayName } = this.state;
+        if (displayName === "") {
+            Alert.alert('エラー', '入力してください');
+            return;
+        }
         this.props.editName(displayName);
     };
 

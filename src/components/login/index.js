@@ -20,7 +20,7 @@ class LoginForm extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const { error, logged } = this.props;
 
-        if (!prevProps.error && error) Alert.alert('error', error);
+        if (!prevProps.error && error) Alert.alert('エラー', error);
 
         if (logged) {
             this.props.navigation.dispatch(loggedReset);
@@ -35,6 +35,10 @@ class LoginForm extends Component {
 
     handleButtonPress = () => {
         const { email, password } = this.state;
+        if (email === "" || password === "") {
+            Alert.alert('エラー', '未入力項目があります');
+            return;
+        }
         this.props.login(email, password);
     };
 

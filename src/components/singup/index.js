@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { signupUser } from '../../actions/auth/actions';
 import { Button, Icon, Input } from "react-native-elements";
 import { styles, primaryButtonStyle } from './style';
+import {secondaryButtonStyle} from "../login/style";
 
 class SignupForm extends Component {
 
@@ -26,6 +27,10 @@ class SignupForm extends Component {
 
     handleButtonPress = () => {
         const { email, password } = this.state;
+        if (email === "" || password === "") {
+            Alert.alert('エラー', '未入力項目があります');
+            return;
+        }
         this.props.signup(email, password);
     };
 
@@ -91,6 +96,12 @@ class SignupForm extends Component {
                             value={this.state.password}
                         />
                         { this.getButton() }
+                        <Button
+                            title="Login"
+                            type="clear"
+                            {...secondaryButtonStyle}
+                            onPress={() => this.props.navigation.navigate('Login')}
+                        />
                     </View>
                 </KeyboardAwareScrollView>
             </View>

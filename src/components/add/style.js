@@ -15,3 +15,9 @@ export const primaryButtonStyle = {
         borderColor: 'transparent',
     }
 };
+
+export const secondaryButtonStyle = {
+    titleStyle: {
+        color: 'white'
+    }
+};

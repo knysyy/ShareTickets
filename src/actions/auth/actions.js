@@ -22,8 +22,8 @@ export const loginUser = (email, password) => dispatch => {
     firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(user => {
-            dispatch(sessionSuccess(user));
+        .then(userCredential => {
+            dispatch(sessionSuccess(userCredential.user));
         })
         .catch(error => {
             dispatch(sessionError(error.message));
@@ -35,8 +35,8 @@ export const signupUser = (email, password) => dispatch => {
     firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            dispatch(sessionSuccess(userCredentials));
+        .then(userCredential => {
+            dispatch(sessionSuccess(userCredential.user));
         })
         .catch(error => {
             dispatch(sessionError(error.message));

@@ -7,4 +7,9 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    logoutButton: {
+        width: 200,
+        borderRadius: 40,
+        marginVertical: 10
+    }
 });

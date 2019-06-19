@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { logoutUser } from "../../actions/auth/actions";
-import {editReset, logoutReset} from "../../actions/route/actions";
 import { styles } from './style';
+import {editReset, logoutReset} from "../../actions/route/actions";
 
 class Home extends Component {
-
-    static navigationOptions = ({ navigation }) => {
-        return {
-            headerLeft: <View />,
-            headerRight: (
-                <TouchableOpacity
-                    style={styles.headerIconRight}
-                    onPress={navigation.getParam('logout')}>
-                    <Icon name="logout" size={30} color="#fff" />
-                </TouchableOpacity>
-            )
-        }
-    };
 
     componentDidMount() {
         if(this.props.user.user && !this.props.user.user.displayName) {
@@ -28,9 +13,6 @@ class Home extends Component {
         if(!this.props.user.displayName) {
             this.props.navigation.dispatch(editReset);
         }
-        this.props.navigation.setParams({
-            logout: this._logout
-        })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -39,10 +21,7 @@ class Home extends Component {
         }
     }
 
-    _logout = () => {
-        this.props.logout();
-    };
-
+    // TODO 友達のリストを表示する。
     render() {
         return (
             <View style={styles.container}>
@@ -58,9 +37,7 @@ const mapStateToProps = ({ authReducer: { loading, user, logged} }) => ({
     logged: logged
 });
 
-const mapDispatchToProps = {
-    logout: logoutUser
-};
+const mapDispatchToProps = {};
 
 export default connect(
     mapStateToProps,
