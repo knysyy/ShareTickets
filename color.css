@@ -1,0 +1,20 @@
+/* Color Theme Swatches in Hex */
+.Coral--Teals-v02-1-hex { color: #234D51; }
+.Coral--Teals-v02-2-hex { color: #9DD3D9; }
+.Coral--Teals-v02-3-hex { color: #59C6D1; }
+.Coral--Teals-v02-4-hex { color: #3B4F51; }
+.Coral--Teals-v02-5-hex { color: #FF513F; }
+
+/* Color Theme Swatches in RGBA */
+.Coral--Teals-v02-1-rgba { color: rgba(35, 77, 80, 1); }
+.Coral--Teals-v02-2-rgba { color: rgba(156, 211, 216, 1); }
+.Coral--Teals-v02-3-rgba { color: rgba(89, 198, 209, 1); }
+.Coral--Teals-v02-4-rgba { color: rgba(59, 79, 80, 1); }
+.Coral--Teals-v02-5-rgba { color: rgba(255, 80, 63, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Coral--Teals-v02-1-hsla { color: hsla(185, 39, 22, 1); }
+.Coral--Teals-v02-2-hsla { color: hsla(185, 44, 73, 1); }
+.Coral--Teals-v02-3-hsla { color: hsla(185, 56, 58, 1); }
+.Coral--Teals-v02-4-hsla { color: hsla(185, 15, 27, 1); }
+.Coral--Teals-v02-5-hsla { color: hsla(5, 100, 62, 1); }
