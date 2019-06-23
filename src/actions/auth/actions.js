@@ -32,6 +32,7 @@ export const loginUser = (email, password) => dispatch => {
 
 export const signupUser = (email, password) => dispatch => {
     dispatch(sessionLoading());
+
     firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)

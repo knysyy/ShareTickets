@@ -4,6 +4,7 @@ import {Card, ListItem} from "react-native-elements";
 import {connect} from 'react-redux';
 import {styles} from './style';
 import {editReset, logoutReset} from "../../actions/route/actions";
+import {getFriend} from "../../actions/friend/actions";
 
 const defaultIcon = require('../../../assets/icon/default_user.png');
 
@@ -16,6 +17,7 @@ class FriendList extends Component {
         if (!this.props.user.displayName) {
             this.props.navigation.dispatch(editReset);
         }
+        this.props.getFriend();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -25,68 +27,48 @@ class FriendList extends Component {
     }
 
     render() {
-        const friends = [
-            {
-                id: 'dfalkdjfalsdkj',
-                name: 'abc',
-                avatar: ''
-            },
-            {
-                id: 'aslkjfasdjf',
-                name: 'abc',
-                avatar: ''
-            },
-            {
-                id: 'fkaslkdjfasd',
-                name: 'abc',
-                avatar: ''
-            },
-            {
-                id: 'faslkjfasdkl',
-                name: 'abc',
-                avatar: ''
-            },
-            {
-                id: 'faskljfasdlkjf',
-                name: 'abc',
-                avatar: ''
-            }
-        ];
+        const {loading, friends} = this.props;
         return (
             <ScrollView style={styles.container}>
-                <Card containerStyle={{padding: 0, marginBottom: 10}}>
-                    {
-                        friends.map((friend) => {
-                            const source = friend.avatar ? {uri: friend.avatar} : defaultIcon;
-                            return (
-                                <ListItem
-                                    key={friend.id}
-                                    title={friend.name}
-                                    leftAvatar={{source: source}}
-                                    onPress={() => this.props.navigation.navigate('TicketList', {
-                                        friendId: friend.id
-                                    })}
-                                    roundAvatar
-                                    chevron
-                                    topDivider
-                                    bottomDivider
-                                />
-                            );
-                        })
-                    }
-                </Card>
+                {loading ? null :
+                    <Card containerStyle={{padding: 0, marginBottom: 10}}>
+                        {
+                            friends.map((friend) => {
+                                const source = friend.avatar ? {uri: friend.avatar} : defaultIcon;
+                                return (
+                                    <ListItem
+                                        key={friend.uid}
+                                        title={friend.displayName}
+                                        leftAvatar={{source: source}}
+                                        onPress={() => this.props.navigation.navigate('TicketList', {
+                                            friendId: friend.uid
+                                        })}
+                                        roundAvatar
+                                        chevron
+                                        topDivider
+                                        bottomDivider
+                                    />
+                                );
+                            })
+                        }
+                    </Card>
+                }
             </ScrollView>
         )
     }
 }
 
-const mapStateToProps = ({authReducer: {loading, user, logged}}) => ({
-    loading: loading,
+const mapStateToProps = ({authReducer: {user, logged}, friendReducer: {loading, friends, error}}) => ({
     user: user,
-    logged: logged
+    logged: logged,
+    loading: loading,
+    friends: friends,
+    error: error
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    getFriend: getFriend
+};
 
 export default connect(
     mapStateToProps,
