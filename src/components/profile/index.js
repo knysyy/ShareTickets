@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text} from 'react-native';
-import { styles } from "./style";
+import { styles, secondaryButtonStyle } from "./style";
 import { connect } from "react-redux";
 import { Button } from "react-native-elements";
 import { logoutUser } from "../../actions/auth/actions";
@@ -21,7 +21,8 @@ class ProfileForm extends Component {
                 <Text>Profile</Text>
                 <Button
                     title='Logout'
-                    {...styles.logoutButton}
+                    type='clear'
+                    {...secondaryButtonStyle}
                     onPress={() => this.props.logout()}
                 />
             </View>

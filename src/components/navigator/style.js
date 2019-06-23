@@ -31,7 +31,7 @@ export const theme = width => ({
     }
 });
 
-export const headerStyle = {
+export const commonHeader = {
     title: 'ShareTickets',
     headerStyle: {
         backgroundColor: '#234D51'

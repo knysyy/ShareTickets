@@ -1,10 +1,10 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {createStackNavigator} from "react-navigation";
 
 import LoginForm from '../login';
 import SignupForm from '../singup';
-import EditForm from '../edit';
-import {headerStyle} from "./style";
+import EditForm from '../registerName';
+import {commonHeader} from "./style";
 
 const AuthStack = createStackNavigator(
     {
@@ -20,8 +20,11 @@ const AuthStack = createStackNavigator(
     },
     {
         initialRouteName: 'Login',
-        headerMode: 'none'
+        defaultNavigationOptions: {
+            ...commonHeader,
+            headerBackTitle: null
+        }
     }
 );
 
-export default createAppContainer(AuthStack);
+export default AuthStack;

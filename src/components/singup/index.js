@@ -100,7 +100,7 @@ class SignupForm extends Component {
                             title="Login"
                             type="clear"
                             {...secondaryButtonStyle}
-                            onPress={() => this.props.navigation.navigate('Login')}
+                            onPress={() => this.props.navigation.goBack()}
                         />
                     </View>
                 </KeyboardAwareScrollView>

@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import { Alert, Text, View } from 'react-native';
-import { connect } from 'react-redux';
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-    Input,
-    Icon,
-    Button
-} from 'react-native-elements';
-import { loginUser, restoreSession } from "../../actions/auth/actions";
-import { loggedReset } from "../../actions/route/actions";
-import { styles, primaryButtonStyle, secondaryButtonStyle } from './style';
+import React, {Component} from 'react';
+import {Alert, Text, View} from 'react-native';
+import {connect} from 'react-redux';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import {Button, Icon, Input} from 'react-native-elements';
+import {loginUser, restoreSession} from "../../actions/auth/actions";
+import {loggedReset} from "../../actions/route/actions";
+import {primaryButtonStyle, secondaryButtonStyle, styles} from './style';
 
 class LoginForm extends Component {
 
@@ -18,7 +14,7 @@ class LoginForm extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { error, logged } = this.props;
+        const {error, logged} = this.props;
 
         if (!prevProps.error && error) Alert.alert('エラー', error);
 
@@ -27,14 +23,14 @@ class LoginForm extends Component {
         }
     }
 
-    state = { email: '', password: '' };
+    state = {email: '', password: ''};
 
-    handleEmailChange = email => this.setState({ email });
+    handleEmailChange = email => this.setState({email});
 
-    handlePasswordChange = password => this.setState({ password });
+    handlePasswordChange = password => this.setState({password});
 
     handleButtonPress = () => {
-        const { email, password } = this.state;
+        const {email, password} = this.state;
         if (email === "" || password === "") {
             Alert.alert('エラー', '未入力項目があります');
             return;
@@ -44,8 +40,8 @@ class LoginForm extends Component {
 
     // TODO Login, SignUp, Editで使用しているので共通化したい
     getButton = () => {
-        const { loading } = this.props;
-        if(loading) {
+        const {loading} = this.props;
+        if (loading) {
             return <Button
                 {...primaryButtonStyle}
                 loading
@@ -76,7 +72,7 @@ class LoginForm extends Component {
                                     type="material-community"
                                     color="rgba(110, 110, 110, 1)"
                                     size={25}
-                                    />
+                                />
                             }
                             placeholder="Email"
                             autoCapitailze="none"
@@ -104,7 +100,7 @@ class LoginForm extends Component {
                             onChangeText={this.handlePasswordChange}
                             value={this.state.password}
                         />
-                        { this.getButton() }
+                        {this.getButton()}
                         <Button
                             title="SignUp"
                             type="clear"
@@ -118,7 +114,7 @@ class LoginForm extends Component {
     }
 }
 
-const mapStateToProps = ({ authReducer: { restoring, loading, user, error, logged } }) => ({
+const mapStateToProps = ({authReducer: {restoring, loading, user, error, logged}}) => ({
     restoring: restoring,
     loading: loading,
     user: user,
