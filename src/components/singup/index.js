@@ -1,32 +1,33 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Alert, Text, View} from 'react-native';
-import { connect } from 'react-redux';
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { signupUser } from '../../actions/auth/actions';
-import { Button, Icon, Input } from "react-native-elements";
-import { styles, primaryButtonStyle } from './style';
-import {secondaryButtonStyle} from "../login/style";
+import {connect} from 'react-redux';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import {signupUser} from '../../actions/auth/actions';
+import {Button, Icon, Input} from "react-native-elements";
+import {styles} from './style';
+import {commonStyle, primaryButtonStyle, secondaryButtonStyle} from "../style/globalStyles";
 
+// TODO displayNameをauthではなくusersのfieldを更新する。
 class SignupForm extends Component {
 
     static navigationOptions = {
-        headerRight: <View />
+        headerRight: <View/>
     };
 
     componentDidMount(): void {
-        if(this.props.registered) {
+        if (this.props.registered) {
             this.props.navigation.navigate('Home');
         }
     }
 
-    state = { email: '', password: '' };
+    state = {email: '', password: ''};
 
-    handleEmailChange = email => this.setState({ email });
+    handleEmailChange = email => this.setState({email});
 
-    handlePasswordChange = password => this.setState({ password });
+    handlePasswordChange = password => this.setState({password});
 
     handleButtonPress = () => {
-        const { email, password } = this.state;
+        const {email, password} = this.state;
         if (email === "" || password === "") {
             Alert.alert('エラー', '未入力項目があります');
             return;
@@ -34,9 +35,9 @@ class SignupForm extends Component {
         this.props.signup(email, password);
     };
 
-    getButton = () => {
-        const { loading } = this.props;
-        if(loading) {
+    renderButton = () => {
+        const {loading} = this.props;
+        if (loading) {
             return <Button
                 {...primaryButtonStyle}
                 loading
@@ -55,9 +56,7 @@ class SignupForm extends Component {
             <View style={styles.container}>
                 <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.contentView}>
-                        <Text
-                            style={styles.textStyle}
-                        >
+                        <Text style={commonStyle.headingStyle}>
                             SingUp
                         </Text>
                         <Input
@@ -95,7 +94,7 @@ class SignupForm extends Component {
                             onChangeText={this.handlePasswordChange}
                             value={this.state.password}
                         />
-                        { this.getButton() }
+                        {this.renderButton()}
                         <Button
                             title="Login"
                             type="clear"
@@ -109,7 +108,7 @@ class SignupForm extends Component {
     }
 }
 
-const mapStateToProps = ({ authReducer : { loading, error, registered } }) => ({
+const mapStateToProps = ({authReducer: {loading, error, registered}}) => ({
     loading: loading,
     error: error,
     registered: registered

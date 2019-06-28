@@ -1,11 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
-import { createStackNavigator } from "react-navigation";
+import {View} from 'react-native';
+import {createStackNavigator} from "react-navigation";
 
 import FriendList from '../friendList';
 import TicketList from '../ticketList';
-import AddTickets from '../addTickets';
-import { commonHeader } from "./style";
+import {commonHeader} from "./style";
 import {switchTabBarVisible} from "../lib";
 
 const HomeStack = createStackNavigator(
@@ -16,12 +15,8 @@ const HomeStack = createStackNavigator(
         TicketList: {
             screen: TicketList,
             navigationOptions: {
-                headerRight: <View />
+                headerRight: <View/>
             }
-        },
-        "Add Tickets": {
-            screen: AddTickets,
-            headerRight: <View />
         }
     },
     {

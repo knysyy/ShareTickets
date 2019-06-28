@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {ScrollView} from 'react-native';
-import {Card, ListItem} from "react-native-elements";
 import {connect} from 'react-redux';
+import {ScrollView, Text, View} from 'react-native';
+import {Card, ListItem} from "react-native-elements";
+import ActionButton from 'react-native-action-button';
 import {styles} from './style';
 import {editReset, logoutReset} from "../../actions/route/actions";
 import {getFriend} from "../../actions/friend/actions";
@@ -26,34 +27,54 @@ class FriendList extends Component {
         }
     }
 
+    renderContent = (friends) => {
+        if (friends.length > 0) {
+            return (
+                <Card containerStyle={{padding: 0, marginBottom: 10}}>
+                    {
+                        friends.map((friend) => {
+                            const source = friend.avatar ? {uri: friend.avatar} : defaultIcon;
+                            return (
+                                <ListItem
+                                    key={friend.uid}
+                                    title={friend.displayName}
+                                    leftAvatar={{source: source}}
+                                    onPress={() => this.props.navigation.navigate('TicketList', {
+                                        friendId: friend.uid
+                                    })}
+                                    roundAvatar
+                                    chevron
+                                    topDivider
+                                    bottomDivider
+                                />
+                            );
+                        })
+                    }
+                </Card>
+            );
+        } else {
+            return (
+                <View style={styles.boxStyle}>
+                    <Text>
+                        まだ友達がいません。
+                    </Text>
+                </View>
+            );
+        }
+    };
+
     render() {
         const {loading, friends} = this.props;
         return (
-            <ScrollView style={styles.container}>
-                {loading ? null :
-                    <Card containerStyle={{padding: 0, marginBottom: 10}}>
-                        {
-                            friends.map((friend) => {
-                                const source = friend.avatar ? {uri: friend.avatar} : defaultIcon;
-                                return (
-                                    <ListItem
-                                        key={friend.uid}
-                                        title={friend.displayName}
-                                        leftAvatar={{source: source}}
-                                        onPress={() => this.props.navigation.navigate('TicketList', {
-                                            friendId: friend.uid
-                                        })}
-                                        roundAvatar
-                                        chevron
-                                        topDivider
-                                        bottomDivider
-                                    />
-                                );
-                            })
-                        }
-                    </Card>
-                }
-            </ScrollView>
+            <View style={{flex: 1}}>
+                <ScrollView style={styles.container}>
+                    {loading ? null : this.renderContent(friends)}
+                </ScrollView>
+                <ActionButton
+                    buttonColor="#FF513F"
+                    onPress={() => this.props.navigation.navigate('Add Friend')}
+                />
+            </View>
         )
     }
 }

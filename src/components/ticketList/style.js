@@ -1,23 +1,29 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from "react-native";
+import * as color from "../style/color";
 
 export const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#9DD3D9",
+    dateStyle: {
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalStyle: {
+        backgroundColor: color.BACKGROUND_COLOR,
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    boxStyle: {
+        flex:1,
         alignItems: 'center',
         justifyContent: 'center'
     }
 });
 
-export const primaryButtonStyle = {
+export const buttonStyle = (width) => ({
     buttonStyle: {
+        width: width * 0.7,
         backgroundColor: '#FF513F',
-        borderColor: 'transparent',
+        borderColor: 'transparent'
     }
-};
-
-export const secondaryButtonStyle = {
-    titleStyle: {
-        color: 'white'
-    }
-};
+});

@@ -12,24 +12,5 @@ export const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    textStyle: {
-        color: 'white',
-        fontSize: 30,
-        marginVertical: 10,
-        fontWeight: '300'
     }
 });
-
-export const primaryButtonStyle = {
-    buttonStyle: {
-        backgroundColor: '#FF513F',
-        borderColor: 'transparent',
-    }
-};
-
-export const secondaryButtonStyle = {
-    titleStyle: {
-        color: 'white'
-    }
-};

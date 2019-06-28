@@ -5,6 +5,7 @@ import LoginForm from '../login';
 import SignupForm from '../singup';
 import EditForm from '../registerName';
 import {commonHeader} from "./style";
+import {View} from "react-native";
 
 const AuthStack = createStackNavigator(
     {
@@ -12,7 +13,10 @@ const AuthStack = createStackNavigator(
             screen: LoginForm
         },
         SignUp: {
-            screen: SignupForm
+            screen: SignupForm,
+            navigationOptions: {
+                headerRight: <View />
+            }
         },
         Edit: {
             screen: EditForm

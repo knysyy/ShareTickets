@@ -1,21 +1,30 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {Text, View} from 'react-native';
 import QRCode from 'react-native-qrcode';
 import uuid from 'react-native-uuid';
-import {styles, footerFixedButton} from './style';
+import {styles} from './style';
 import {Button} from "react-native-elements";
 import {connect} from "react-redux";
+import {getCameraPermission} from "../lib";
+import {commonStyle, primaryButtonStyle} from "../style/globalStyles";
 
 class QRCodeForm extends Component {
     state = {
         value: uuid.v4()
     };
 
+    async onPressButton() {
+        const granted = await getCameraPermission();
+        if (granted) {
+            this.props.navigation.navigate('QRCodeReader');
+        }
+    }
+
     // TODO ユーザー登録の際にuuidを保存しそこからQRCodeを表示する。
     // TODO カメラを起動して友達登録画面を作成する。
     render() {
         return (
-            <View style={styles.container}>
+            <View style={commonStyle.container}>
                 <View style={styles.qrCodeView}>
                     <QRCode
                         value={this.state.value}
@@ -31,8 +40,8 @@ class QRCodeForm extends Component {
                 </View>
                 <Button
                     title="QRコードリーダー"
-                    {...footerFixedButton}
-                    onPress={() => this.props.navigation.navigate('QRCodeReader')}
+                    {...primaryButtonStyle}
+                    onPress={() => this.onPressButton()}
                 />
             </View>
         )

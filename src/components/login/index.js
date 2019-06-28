@@ -5,7 +5,8 @@ import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import {Button, Icon, Input} from 'react-native-elements';
 import {loginUser, restoreSession} from "../../actions/auth/actions";
 import {loggedReset} from "../../actions/route/actions";
-import {primaryButtonStyle, secondaryButtonStyle, styles} from './style';
+import {styles} from './style';
+import {commonStyle, primaryButtonStyle, secondaryButtonStyle} from '../style/globalStyles';
 
 class LoginForm extends Component {
 
@@ -39,7 +40,7 @@ class LoginForm extends Component {
     };
 
     // TODO Login, SignUp, Editで使用しているので共通化したい
-    getButton = () => {
+    renderButton = () => {
         const {loading} = this.props;
         if (loading) {
             return <Button
@@ -55,14 +56,13 @@ class LoginForm extends Component {
         }
     };
 
+    // TODO 名前の持ち方を考える。
     render() {
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.contentView}>
-                        <Text
-                            style={styles.textStyle}
-                        >
+                        <Text style={commonStyle.headingStyle}>
                             Login
                         </Text>
                         <Input
@@ -100,7 +100,7 @@ class LoginForm extends Component {
                             onChangeText={this.handlePasswordChange}
                             value={this.state.password}
                         />
-                        {this.getButton()}
+                        {this.renderButton()}
                         <Button
                             title="SignUp"
                             type="clear"
