@@ -34,7 +34,7 @@ class TicketList extends Component {
     handleButtonPress = () => {
         const {title, date} = this.state;
         if (title === '' || date === '') {
-            Alert.alert('Error', '未入力項目があります。');
+            Alert.alert('エラー', '未入力項目があります。');
             return;
         }
         this.props.addTicket(title, date);
@@ -53,11 +53,12 @@ class TicketList extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.error === null && this.props.error !== null) {
-            Alert.alert('Error', this.props.error);
+            Alert.alert('エラー', this.props.error);
             this.props.navigation.goBack();
         }
     }
 
+    // TODO チケットを使えるようにする。
     renderYourItem({item}) {
         const day = formatDate(item.expireDate.toDate());
         return (

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {ScrollView, Text, View} from 'react-native';
 import {Card, ListItem} from "react-native-elements";
 import ActionButton from 'react-native-action-button';
+import firebase from 'react-native-firebase';
 import {styles} from './style';
 import {editReset, logoutReset} from "../../actions/route/actions";
 import {getFriend} from "../../actions/friend/actions";
@@ -12,13 +13,20 @@ const defaultIcon = require('../../../assets/icon/default_user.png');
 class FriendList extends Component {
 
     componentDidMount() {
-        if (this.props.user.user && !this.props.user.user.displayName) {
-            this.props.navigation.dispatch(editReset);
-        }
-        if (!this.props.user.displayName) {
-            this.props.navigation.dispatch(editReset);
-        }
-        this.props.getFriend();
+        const {navigation, user} = this.props;
+        const userRef = firebase.firestore().collection('users').doc(user.uid);
+        userRef.get()
+            .then((userData) => {
+                if (userData.exists) {
+                    this.props.getFriend();
+                } else {
+                    throw '名前が登録されていません';
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                navigation.dispatch(editReset);
+            });
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -28,7 +36,7 @@ class FriendList extends Component {
     }
 
     renderContent = (friends) => {
-        if (friends.length > 0) {
+        if (friends !== null && friends.length > 0) {
             return (
                 <Card containerStyle={{padding: 0, marginBottom: 10}}>
                     {
@@ -65,9 +73,10 @@ class FriendList extends Component {
 
     render() {
         const {loading, friends} = this.props;
+        const scrollContainerStyle = friends.length ? {} : {flexGrow: 1, justifyContent: 'center'};
         return (
             <View style={{flex: 1}}>
-                <ScrollView style={styles.container}>
+                <ScrollView style={styles.container} contentContainerStyle={scrollContainerStyle}>
                     {loading ? null : this.renderContent(friends)}
                 </ScrollView>
                 <ActionButton

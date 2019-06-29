@@ -50,7 +50,7 @@ export const getCameraPermission = async () => {
                 return true;
             }
             else {
-                Alert.alert('Error', 'カメラへのアクセス許可がないと使用できません');
+                Alert.alert('エラー', 'カメラへのアクセス許可がないと使用できません');
                 return false;
             }
         }

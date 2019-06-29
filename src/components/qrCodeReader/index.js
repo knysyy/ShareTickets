@@ -21,8 +21,13 @@ class QRCodeReader extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.error === null && this.props.error !== null) {
-            Alert.alert('Error', this.props.error);
+            Alert.alert('エラー', this.props.error);
             this.props.navigation.goBack();
+        }
+
+        if(!prevProps.success && this.props.success) {
+            Alert.alert('成功', '友達を追加しました');
+            this.props.navigation.navigate('Home');
         }
     }
 
@@ -49,7 +54,6 @@ class QRCodeReader extends Component {
                         barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
                     >
                         <BarcodeMask height={280} edgeColor={'white'} showAnimatedLine={false}/>
-                        <Button title="登録" onPress={() => this.props.addFriend('KipCD5vIa1eTObOA3KFeo6JQhkS2')}/>
                     </RNCamera>
                 }
             </View>
@@ -57,9 +61,10 @@ class QRCodeReader extends Component {
     }
 }
 
-const mapStateToProps = ({friendReducer: {loading, error}}) => ({
+const mapStateToProps = ({friendReducer: {loading, error, success}}) => ({
     loading: loading,
-    error: error
+    error: error,
+    success: success
 });
 
 const mapDispatchToProps = {

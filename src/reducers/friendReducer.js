@@ -3,7 +3,8 @@ import * as types from '../actions/friend/actionsTypes';
 const initialState = {
     loading: false,
     friends: [],
-    error: null
+    error: null,
+    success: false
 };
 
 const friendReducer = (state = initialState, action) => {
@@ -15,9 +16,9 @@ const friendReducer = (state = initialState, action) => {
         case types.GET_FRIEND_ERROR:
             return {...state, loading: false, error: action.error};
         case types.ADD_FRIEND_START:
-            return {...state, loading: true, error: null};
+            return {...state, loading: true, error: null, success: false};
         case types.ADD_FRIEND_SUCCESS:
-            return {...state, friends: action.friends, loading: false};
+            return {...state, friends: action.friends, loading: false, success: true};
         case types.ADD_FRIEND_ERROR:
             return {...state, loading: false, error: action.error};
         default:
