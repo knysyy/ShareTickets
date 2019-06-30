@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
+import * as color from "../style/color";
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#9DD3D9",
+        backgroundColor: color.BACKGROUND_COLOR,
         flex: 1
     },
     scrollContainer: {
@@ -12,11 +13,5 @@ export const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    textStyle: {
-        color: 'white',
-        fontSize: 30,
-        marginVertical: 10,
-        fontWeight: '300'
     }
 });

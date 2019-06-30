@@ -37,7 +37,6 @@ class QRCodeReader extends Component {
         }
     }
 
-    // TODO QRコードを読み込んだ後に友達登録を行う。
     render() {
         const {loading} = this.props;
         return (

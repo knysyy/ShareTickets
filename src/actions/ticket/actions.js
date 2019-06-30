@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
 import uuid from 'react-native-uuid';
 import * as types from './actionsTypes';
-import {ToastAndroid} from "react-native";
+import Snackbar from "react-native-snackbar";
 
 export const setFriendId = (friendId) => dispatch => {
     dispatch({
@@ -70,11 +70,10 @@ export const addTicket = (title, date) => async (dispatch, getState) => {
                 return ticket;
             });
         friendTickets.push(ticket);
-        ToastAndroid.showWithGravity(
-            'チケットを発行しました',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER
-        );
+        Snackbar.show({
+            title: 'チケットを発行しました',
+            duration: Snackbar.LENGTH_SHORT
+        });
         dispatch(addSuccess(friendTickets));
     } catch (error) {
         dispatch(addError(error.message));

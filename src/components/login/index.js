@@ -7,6 +7,7 @@ import {loginUser, restoreSession} from "../../actions/auth/actions";
 import {loggedReset} from "../../actions/route/actions";
 import {styles} from './style';
 import {commonStyle, primaryButtonStyle, secondaryButtonStyle} from '../style/globalStyles';
+import Snackbar from "react-native-snackbar";
 
 class LoginForm extends Component {
 
@@ -17,9 +18,16 @@ class LoginForm extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {error, logged} = this.props;
 
-        if (!prevProps.error && error) Alert.alert('エラー', error);
+        if (!prevProps.error && error) {
+            Alert.alert('エラー', error);
+            return;
+        }
 
         if (logged) {
+            Snackbar.show({
+                title: 'ログインしました',
+                duration: Snackbar.LENGTH_SHORT
+            });
             this.props.navigation.dispatch(loggedReset);
         }
     }
@@ -56,7 +64,6 @@ class LoginForm extends Component {
         }
     };
 
-    // TODO 名前の持ち方を考える。
     render() {
         return (
             <View style={styles.container}>

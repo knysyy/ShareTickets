@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import {editName} from '../../actions/edit/actions';
 import {restoreSession} from "../../actions/auth/actions";
-import {primaryButtonStyle, styles} from "./style";
+import {styles} from "./style";
+import {commonStyle, primaryButtonStyle} from '../style/globalStyles';
 
 class EditForm extends Component {
 
@@ -51,7 +52,7 @@ class EditForm extends Component {
                 <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.contentView}>
                         <Text
-                            style={styles.textStyle}
+                            style={commonStyle.headingStyle}
                         >
                             Edit
                         </Text>

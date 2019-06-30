@@ -102,8 +102,7 @@ class TicketList extends Component {
                     renderItem={flag ? this.renderYourItem : this.renderFriendItem}
                     sliderWidth={WINDOW_WIDTH}
                     itemWidth={WINDOW_WIDTH * 0.85}
-                    layout={'default'}
-                    loop
+                    layout={'stack'}
                 />
             );
         } else {
